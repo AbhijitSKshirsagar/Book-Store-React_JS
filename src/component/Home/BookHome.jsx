@@ -8,11 +8,6 @@ import { Link,withRouter  } from 'react-router-dom';
 import BookServices from '../../component/Service/BookService'
 import Button from '@mui/material/Button';
 import Header from '../Header/Header'
-import Profile1 from '../../assets/Dont make me think.jpeg';
-import Profile2 from '../../assets/Half Girlfriend.jpeg';
-import Profile3 from '../../assets/Harry Potter.jpeg';
-import Profile4 from '../../assets/RDPD.jpeg';
-
 
 
 class HomeBook extends Component {
@@ -66,7 +61,11 @@ fetchData() {
                  <h4>{book.bookName}</h4>
                  <h6>{book.authorName}</h6>
                 <h5>RS.{book.price}</h5>
-              <Button variant="contained" size="large" type="submit" className="button submitButton" id="submitButton">Add to Cart</Button>
+                <Link to="/cart">
+              <Button variant="contained" size="large" type="submit" className="button submitButton" id="submitButton">ADD TO CART</Button>
+              </Link>
+              <Button variant="contained" size="large" type="submit" className="button submitButton"
+              id="submitButton">BUY NOW</Button>    
             </CardContent>
           </CardActionArea>
         </Card>

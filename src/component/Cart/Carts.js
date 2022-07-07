@@ -45,12 +45,6 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     backgroundColor: '#fff',
     position: 'relative',
     marginRight:"5rem",
-    // [breakpoints.up('md')]: {
-    //   width: '90%',
-    //   marginLeft: spacing(-3),
-    //   marginTop: 0,
-    //   transform: 'translateX(-8px)',
-    // },
   },
   content: {
     padding: 50,
@@ -93,18 +87,12 @@ export const BlogCardDemo = React.memo(function BlogCard() {
   },[]);
 
   const fetchCartDetails = () => {
-    CartServices.getAll().then((response) => {
+    CartServices.get().then((response) => {
         setCartDetails(response.data.data);
       })
   };
   console.log(cartDetails);
 
-//   deleteCartItem=(cartItemId) => {
-//     let id = parseInt(cartItemId)
-//     CartServices.deleteEmployee(id);
-//     window.location.reload();
-// };
-  
 return(<>
  <Header/>
   <Typography style={{ }}>Cart Count:{cartDetails.length}</Typography>
@@ -117,18 +105,17 @@ return(<>
         image={Image}
       />
       <CardContent>
-       <h2>Rich Dad Poor Dad</h2>
-       <h5>by Robert T.Kiyosaki</h5>
-        <h4>Rs.450</h4>
+       <h2>Vahana Masterclass</h2>
+       <h5>by Alfredo Covelli</h5>
+        <h4>Rs.250</h4>
         <h5>Quantity</h5>
         <div class="wrapper">
             <span class="minus" onClick={handleDecrement}>-</span>
             <span class="num" id="root" >{1+ qty}</span>
             <span class="plus" onClick={handleIncrement}>+</span>
         </div>
-        <p>Total Price <br/>{450+450 *qty }</p>
+        <p>Total Price <br/>{250+250 *qty }</p>
         <Button className={buttonStyles}>Continue</Button>
-        <button onClick="" >Remove Item</button>
       </CardContent>
     </Card>
     </>

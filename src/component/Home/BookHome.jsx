@@ -8,6 +8,7 @@ import { Link, withRouter } from 'react-router-dom';
 import BookServices from '../../component/Service/BookService'
 import Button from '@mui/material/Button';
 import Header from '../Header/Header'
+import CartService from '../../component/Service/CartService'
 
 
 class HomeBook extends Component {
@@ -29,6 +30,24 @@ class HomeBook extends Component {
       this.setState({ books: response.data.data });
       console.log(response);
     });
+  }
+
+  addToCart (bookId) {
+    console.log(bookId);
+    const id=localStorage.getItem('Authorization')
+    const userId = JSON.parse(id);
+    console.log("UserId",id)
+    let object = {
+      bookId: bookId,
+      quantity: 1,
+      userId:id,
+    }
+    console.log("BookId",bookId)
+    console.log(object);
+    CartService.addCartItem(object).then((response) => {
+      console.log(response);
+      window.location.reload();
+    })  
   }
 
   render = () => {
@@ -62,7 +81,7 @@ class HomeBook extends Component {
                   <h6>{book.authorName}</h6>
                   <h5>RS.{book.price}</h5>
                   <Link to="/cart">
-                    <Button variant="contained" size="large" type="submit" className="button submitButton" id="submitButton">ADD TO CART</Button>
+                    <Button variant="contained" size="large" type="submit" className="button submitButton" id="submitButton" onClick={()=> this.addToCart(book.bookId)}>ADD TO CART</Button>
                   </Link>
                   <Button variant="contained" size="large" type="submit" className="button submitButton"
                     id="submitButton">BUY NOW</Button>

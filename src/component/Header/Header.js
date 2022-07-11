@@ -15,9 +15,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-//import Link from '@mui/material/Link';
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import CartService from '../Service/CartService';
+import './Header.css'
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -59,7 +61,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -78,6 +79,18 @@ export default function PrimarySearchAppBar() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const [cartDetails, setCartDetails] = useState([]);
+
+  useEffect(() => {
+    fetchCartDetails();
+  }, []);
+
+  const fetchCartDetails = () => {
+    CartService.getAll().then((response) => {
+      setCartDetails(response.data.data)
+    })
   };
 
   const handleMobileMenuClose = () => {
@@ -110,8 +123,13 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Login</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My order</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Login</MenuItem> */}
+      {/* <MenuItem onClick={handleMenuClose}>My order</MenuItem> */}
+
+      <MenuItem onClick={handleMenuClose}>{localStorage.getItem('Name')}</MenuItem>
+      <Link to="/login">
+        <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -134,7 +152,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={cartDetails.length} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -185,13 +203,20 @@ export default function PrimarySearchAppBar() {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
+            <div className='Home-Button'>
+              <Link to="/home">
+                <Button variant="contained" size="small"
+                  type="submit" className="button submitButton"
+                  id="submitButton">HOME</Button>
+              </Link>
+            </div>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <IconButton aria-label="cart">
-                <StyledBadge badgeContent={4} color="secondary">
+              <Link to="/cart"><IconButton aria-label="cart">
+                <StyledBadge color="secondary">
                   <ShoppingCartIcon />
                 </StyledBadge>
-              </IconButton>
+              </IconButton></Link>
               <IconButton
                 size="large"
                 edge="end"
@@ -221,10 +246,6 @@ export default function PrimarySearchAppBar() {
         {renderMobileMenu}
         {renderMenu}
       </Box>
-      <Link to="/home">
-        <Button variant="contained" size="small" type="submit" className="button submitButton"
-          id="submitButton">HOME</Button>
-      </Link>
     </>
   );
 }

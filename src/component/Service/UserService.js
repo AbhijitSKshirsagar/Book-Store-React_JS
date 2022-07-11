@@ -16,5 +16,6 @@ class UserService {
       return axios.post(`${this.baseUrl}/login`,data);
     }
 
+
 }
 export default new UserService();

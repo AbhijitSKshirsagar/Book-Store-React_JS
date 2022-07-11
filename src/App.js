@@ -5,7 +5,7 @@ import Home from './component/Home/BookHome';
 import Regiser from './component/UserRegistration/RegisterForm'
 import Login from "./Login/Login";
 import Cart from './component/Cart/Cart'
-import Carts from './component/Cart/Carts'
+import Order from './component/Order/placeOrder'
 
 
 function App() {
@@ -18,8 +18,7 @@ function App() {
             <Route path="/Login"><Login/></Route>
             <Route path="/register"><Regiser /></Route>
             <Route path="/cart" component={Cart}></Route>
-            <Route path="/carts" component={Carts}></
-            Route>
+            <Route path="/order"><Order/></Route>
           </Switch>
         </Router>      
     </div>

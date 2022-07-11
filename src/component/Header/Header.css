@@ -1,0 +1,7 @@
+.Home-Button {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+}

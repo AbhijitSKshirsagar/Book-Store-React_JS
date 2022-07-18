@@ -46,7 +46,8 @@ class HomeBook extends Component {
     console.log(object);
     CartService.addCartItem(object).then((response) => {
       console.log(response);
-      window.location.reload();
+      console.log(response.data.data.cartId)
+     // window.location.reload();
     })  
   }
 
@@ -80,9 +81,9 @@ class HomeBook extends Component {
                   <h4>{book.bookName}</h4>
                   <h6>{book.authorName}</h6>
                   <h5>RS.{book.price}</h5>
-                  <Link to="/cart">
+                  
                     <Button variant="contained" size="large" type="submit" className="button submitButton" id="submitButton" onClick={()=> this.addToCart(book.bookId)}>ADD TO CART</Button>
-                  </Link>
+                  
                   <Button variant="contained" size="large" type="submit" className="button submitButton"
                     id="submitButton">BUY NOW</Button>
                 </CardContent>

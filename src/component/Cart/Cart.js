@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Header from '../Header/Header'
 import Image from '../../assets/vahana.jpg'
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -13,17 +12,18 @@ import CartService from '../../component/Service/CartService';
 import { Button, CardMedia } from "@mui/material";
 import { Link, withRouter } from 'react-router-dom';
 import ImageListItem from '@mui/material/ImageListItem';
+import Header from '../../component/Header/Header'
 
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
 
   root: {
     margin: "1rem",
-    borderRadius: spacing(2), // 16px
+    borderRadius: spacing(2), 
     transition: '0.3s',
     boxShadow: '0px 10px 20px #1687d933',
     position: 'relative',
-    width: 800,
+    width: 700,
     marginLeft: "17rem",
     overflow: 'initial',
     background: '#ffffff',
@@ -101,19 +101,8 @@ export default function FlexDirection() {
   const shadowStyles = useOverShadowStyles();
 
   const [qty, setQty] = useState(0);
-  function handleDecrement() {
-    if (qty == 0) {
-      return
-    }
-    else {
-      setQty(qty - 1);
-    }
-  }
-  function handleIncrement() {
-    setQty(qty + 1);
-  }
 
-  //Fetching Data
+  // Fetching Data
   const [cartDetails, setCartDetails] = useState([]);
 
   useEffect(() => {
@@ -132,17 +121,18 @@ export default function FlexDirection() {
     CartService.deleteCartItem(bookId);
     window.location.reload();
   };
-  const updateQuantity = (qty) => {
-    let quantity = qty
-  }
-  const getOrder = (cartId) => {
-    this.props.history.push(`Order/${cartId}`);
-    console.log(cartId);
-  }
+  // const updateQuantity = (qty) => {
+    // let quantity = qty
+  // }
+  // const getOrder = (cartId) => {
+    // this.props.history.push(`Order/${cartId}`);
+    // console.log(cartId);
+  // }
 
   return (
-    <div style={{ width: '100%' }}>
-      <Header />
+    
+    <div className="Body" style={{ width: '100%' }}>
+       <Header/>
       <Card className={cx(styles.root, shadowStyles.root)}>
         {cartDetails.map((cartItem, index) => {
           return (
@@ -153,18 +143,18 @@ export default function FlexDirection() {
                 marginLeft: '10rem',
                 alignContent: 'center',
                 flexDirection: 'row',
+                // flex-wrap: nowrap;
                 paddingLeft: '50px',
                 p: 1,
                 m: 1,
                 bgcolor: 'background.paper',
                 borderRadius: 1,
               }}
-            > <div>
+            > <div className="Images">
                 <Item>
                   <ImageListItem>
                     <img
                       src={cartItem.book.bookImage}
-                      loading="lazy"
                     />
                   </ImageListItem>
                 </Item>
@@ -175,13 +165,21 @@ export default function FlexDirection() {
                 <h5>Rs.{cartItem.book.price}</h5>
                 <h5>Quantity</h5>
                 <h4>Total Price <br />{cartItem.book.price + cartItem.book.price * qty}</h4>
-                {/* </div> */}
-                <Button onClick={() => deleteCartItem(cartItem.cartId)} variant="contained" color="secondary">Delete Item</Button>
+                <>
+                  <div class="wrapper">
+                    <Button onClick={() => deleteCartItem(cartItem.cartId)} variant="contained"
+                      color="secondary">Delete Item</Button>
+                  </div>
+                </>
               </div>
             </Box>
           )
         })}
-          <Button variant="contained" >Continue</Button>
+        <div className="Continue-button">
+          <Link to="/customer">
+            <Button variant="contained" colore='warning' >Continue</Button>
+          </Link>
+        </div>
       </Card>
 
     </div>

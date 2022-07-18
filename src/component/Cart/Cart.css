@@ -1,4 +1,4 @@
- .float-layout {
+.float-layout {
   padding: "1rem";
   float: left;
   width: 100%;
@@ -7,28 +7,28 @@
   margin: 0;
 }
 
-add this it
 .card-image {
   display: flex;
 }
 
-
 .card {
+  background-color: dodgerblue;
   color: black;
-  min-height: 100%; 
+  min-height: 100%;
   width: 50%;
   float: right;
 }
 
-.cart-form{
+.cart-form {
   height: auto;
   position: relative;
   align-content: stretch;
   align-items: center;
   width: 45%;
-  margin-top:5%;
+  margin-top: 5%;
+  background: #f5f5f5 0% 0% no-repeat padding-box;
   box-shadow: 0px 9px 9px #00000029;
-  border:1px solid #f5f5f5;
+  border: 1px solid #f5f5f5;
   border-radius: 8px;
   opacity: 1;
   margin-left: 15%;
@@ -36,10 +36,28 @@ add this it
   width: 100%;
 }
 
-.card-container{
- background-color: aqua;
+.card-container {
+  overflow: hidden;
 }
-  
 
+.Continue-button {
+  display: flex;
+  flex-direction:column;
+  align-items:flex-end;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
+.mages{
+  display: flex;
+  flex-direction:row;
+  background-color: #f1f1f1;
+  margin: 20px;
+  padding: 40px;
+  font-size: 30px;
+}
 
+/* .Body{ */
+  /* background-color: rgb(218, 248, 248); */
+/* } */

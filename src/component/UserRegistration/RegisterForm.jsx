@@ -43,7 +43,7 @@ const RegistrationForm = (props) => {
                 console.log(response);
                 alert("Data Added!!", response)
             })
-            alert("Regisraion Success....")
+            alert("Regitsraion Success....")
             history.push("/login");
         }
     }
